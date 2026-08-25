@@ -3764,7 +3764,7 @@
 		(uuid "dc85159d-3a98-44d0-b15b-a6a2628abd66")
 	)
 	(no_connect
-		(at 134.62 127)
+		(at 8.89 134.62)
 		(uuid "e18e97bd-841f-4cfe-81c2-6e49a4d0176b")
 	)
 	(no_connect
@@ -3871,7 +3871,7 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 127) (xy 134.62 127)
+			(xy 5.08 134.62) (xy 8.89 134.62)
 		)
 		(stroke
 			(width 0)
@@ -4041,7 +4041,7 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 137.16) (xy 130.81 134.62)
+			(xy 5.08 144.78) (xy 5.08 142.24)
 		)
 		(stroke
 			(width 0)
@@ -5546,7 +5546,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 130.81 137.16 0)
+		(at 5.08 144.78 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5554,7 +5554,7 @@
 		(dnp no)
 		(uuid "2859c686-0592-4b86-a21a-b490caf88e8b")
 		(property "Reference" "#PWR07"
-			(at 130.81 143.51 0)
+			(at 5.08 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5563,7 +5563,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 126.746 139.7 0)
+			(at 1.016 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5571,7 +5571,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 130.81 137.16 0)
+			(at 5.08 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5580,7 +5580,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 130.81 137.16 0)
+			(at 5.08 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5589,7 +5589,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 130.81 137.16 0)
+			(at 5.08 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5997,7 +5997,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 130.81 130.81 180)
+		(at 5.08 138.43 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6005,7 +6005,7 @@
 		(dnp no)
 		(uuid "668b2bb6-a986-4578-8bdb-4fd55aa92315")
 		(property "Reference" "C10"
-			(at 126.238 127.508 90)
+			(at 0.508 135.128 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6013,7 +6013,7 @@
 			)
 		)
 		(property "Value" "1u"
-			(at 128.778 127.508 90)
+			(at 3.048 135.128 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6021,7 +6021,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
-			(at 129.8448 127 0)
+			(at 4.1148 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6030,7 +6030,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 130.81 130.81 0)
+			(at 5.08 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6039,7 +6039,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 130.81 130.81 0)
+			(at 5.08 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
