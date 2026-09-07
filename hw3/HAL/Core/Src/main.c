@@ -24,24 +24,17 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "string.h"
+#include "led.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-enum onoff_enum { ON, OFF };
-typedef uint8_t onoff_t; 
-typedef struct led_t {
-  uint32_t tick;
-  uint32_t prev_tick;
-  uint16_t blink;
-  uint8_t state;
-  onoff_t enable; 
-} led_t;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-led_t led = { 0,0,0,0 };
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -59,6 +52,7 @@ char* err_count_str = NULL;
 char str[256] = {0};
 uint8_t str_len = 0;
 char inttostrbuf[11] = {0};
+LED_t led;
 char* baudrate_str = NULL;
 /* USER CODE END PV */
 
@@ -105,13 +99,13 @@ int main(void)
   MX_SPI1_Init();
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
+  LED_Init(&led, LED_GPIO_Port, LED_Pin);
   BM_UART_Init(BAUD_RATE); // Custom self-made bare-metal init, no HAL USART drivers needed, disabled in CubeMX 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  led_tick = HAL_GetTick();
-  led_prev_tick = HAL_GetTick();
+
 
   baudrate_str = uint32_to_str(BAUD_RATE, inttostrbuf);
   str_len = strlen(baudrate_str);
@@ -121,30 +115,24 @@ int main(void)
   str_len += (25 + 9);
   BM_UART_Transmit(str, str_len);
   HAL_Delay(2);
-  LED_GPIO_Port->BSRR = LED_Pin << 16U;
+  led.enable = ON;
 
   while(1)
   { 
-    if (BM_UART_rx_res != 0 ) {
+    LED_Handler(&led, HAL_GetTick());
+    
+/*    if (BM_UART_rx_res != 0 ) {
       if (BM_UART_rx_res > 0) {
         str_len = BM_UART_rx_res;
         memcpy(str, BM_UART_rx_buf, str_len);
         err_count = 0;
-        err_count_str = NULL;      //enable string back send at stage 1
+        err_count_str = NULL;     
       }
       BM_UART_Receive(BM_UART_rx_buf, 256);
     }
-    /* Blinker */
-    if(led_blink) {
-      led_tick = HAL_GetTick();
-      if((led_tick - led_prev_tick) >= 10) {
-        uint32_t led_state = LED_GPIO_Port->ODR;
-        LED_GPIO_Port->BSRR = ((led_state & LED_Pin) << 16U) | (~led_state & LED_Pin);
-        led_prev_tick = led_tick;
-      }
-    } else { 
-      LED_GPIO_Port->BSRR = (led_state & LED_Pin); 
-    }
+*/
+    if(led.blink == 0 && HAL_GetTick() > 2000) led.blink = 100;
+    HAL_Delay(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -198,9 +186,6 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void led_handler(led_t led) {
-
-}
 
 // Convert a uint32_t into a null-terminated string array
 char* uint32_to_str(uint32_t val, char* buf) {
