@@ -49,11 +49,14 @@ uint32_t err_count = 0;
 uint32_t res = 0;
 char* err_count_str = NULL;
 
+uint8_t buffer[16] = {0};
+
 char str[256] = {0};
 uint8_t str_len = 0;
 char inttostrbuf[11] = {0};
 LED_t led;
 char* baudrate_str = NULL;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -116,6 +119,16 @@ int main(void)
   BM_UART_Transmit(str, str_len);
   HAL_Delay(2);
   led.enable = ON;
+  HAL_SPI_Receive(&hspi2, buffer, 16, 10);
+  HAL_Delay(1);
+  HAL_SPI_Transmit(&hspi1, (const uint8_t *)"0123456789ABCDEF", 16, 5);
+  memcpy(str,"Sent from SPI1 to SPI2\n",24);
+  BM_UART_Transmit(str,strlen(str));
+  HAL_Delay(2);
+  memcpy(str,"Received: ",11);
+  BM_UART_Transmit(str,strlen(str));
+  HAL_Delay(2);
+  BM_UART_Transmit((char*)buffer, sizeof(buffer));
 
   while(1)
   { 
@@ -131,7 +144,7 @@ int main(void)
       BM_UART_Receive(BM_UART_rx_buf, 256);
     }
 */
-    if(led.blink == 0 && HAL_GetTick() > 2000) led.blink = 100;
+    if(HAL_GetTick() > 10*(led.blink+200)) led.blink += 100;
     HAL_Delay(1);
     /* USER CODE END WHILE */
 

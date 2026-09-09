@@ -1,6 +1,5 @@
 #include <led.h>
 
-
 void LED_Init(LED_t* led, GPIO_TypeDef* gpio_port, uint16_t pin_mask) {
     led->GPIO = gpio_port;
     led->pin_mask = pin_mask;
