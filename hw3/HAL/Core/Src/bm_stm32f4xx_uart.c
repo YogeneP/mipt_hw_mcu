@@ -163,10 +163,10 @@ void _CONCAT3(USART, BM_UART_N,_IRQHandler)(void)
 {
   if(BM_UART_INST->SR & USART_SR_TXE) {
     CLEAR_BIT(BM_UART_INST->CR1, USART_CR1_TXEIE);
-    BM_UART_Transmit(NULL,1); //repetative call: buf address doesn't matter; len - non zero
+    BM_UART_Transmit(NULL,1); //repetative call: buf address NULL; len - non zero
   }
   if(BM_UART_INST->SR & USART_SR_RXNE) {
     CLEAR_BIT(BM_UART_INST->CR1, USART_CR1_RXNEIE);
-    BM_UART_Receive(NULL,1); //repetative call: buf address doesn't matter; len - non zero
+    BM_UART_Receive(NULL,1); //repetative call: buf address NULL; len - non zero
   }
 }
